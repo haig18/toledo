@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toledo · Fin de Semana</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --stone: #F5EFE4;
+    --parchment: #EDE5D2;
+    --ink: #1C1610;
+    --ink-soft: #3D3326;
+    --rust: #8B3A2A;
+    --moss: #4A6741;
+    --sky: #2E5F7A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--stone);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+    padding: 52px 24px 40px;
+    text-align: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(139,58,42,0.15) 0%, transparent 50%);
+  }
+
+  .hero-label {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    position: relative;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--stone);
+    line-height: 1;
+    position: relative;
+    margin-bottom: 6px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+    display: block;
+    font-size: 28px;
+    margin-top: 4px;
+  }
+
+  .hero-sub {
+    color: rgba(245,239,228,0.5);
+    font-size: 13px;
+    letter-spacing: 1px;
+    position: relative;
+    margin-top: 16px;
+  }
+
+  .hero-divider {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin: 20px auto 0;
+    position: relative;
+    opacity: 0.6;
+  }
+
+  /* ORNAMENT */
+  .ornament {
+    text-align: center;
+    padding: 20px 0 4px;
+    color: var(--gold);
+    font-size: 18px;
+    opacity: 0.5;
+  }
+
+  /* DAY BLOCK */
+  .day-block {
+    margin: 0 16px 20px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 20px rgba(28,22,16,0.1);
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .day-block:nth-child(1) { animation-delay: 0.1s; }
+  .day-block:nth-child(2) { animation-delay: 0.2s; }
+  .day-block:nth-child(3) { animation-delay: 0.3s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+  }
+
+  .day-header.viernes { background: var(--sky); }
+  .day-header.sabado  { background: var(--rust); }
+  .day-header.domingo { background: var(--moss); }
+
+  .day-badge {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .day-badge .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .day-badge .dia {
+    font-size: 8px;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1;
+    margin-top: 1px;
+  }
+
+  .day-title-wrap .subtitle {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 2px;
+  }
+
+  .day-title-wrap h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .day-body {
+    background: #fff;
+  }
+
+  /* STOP */
+  .stop {
+    display: flex;
+    gap: 16px;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--parchment);
+    position: relative;
+  }
+
+  .stop:last-child { border-bottom: none; }
+
+  .stop-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 36px;
+  }
+
+  .stop-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    background: var(--parchment);
+  }
+
+  .stop-line {
+    flex: 1;
+    width: 1px;
+    background: var(--parchment);
+    margin-top: 6px;
+  }
+
+  .stop:last-child .stop-line { display: none; }
+
+  .stop-content { flex: 1; padding-top: 2px; }
+
+  .stop-time {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 3px;
+  }
+
+  .stop-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  .stop-desc {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  .stop-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 10.5px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+  }
+
+  .tag-free   { background: #EAF4EA; color: var(--moss); }
+  .tag-price  { background: #FEF3E2; color: #A0622C; }
+  .tag-time   { background: #EEF3F8; color: var(--sky); }
+  .tag-tip    { background: #FDF0EE; color: var(--rust); }
+
+  /* RESTO CARDS */
+  .resto-list {
+    margin-top: 12px;
+    border: 1px solid var(--parchment);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .resto-card {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--parchment);
+    background: var(--stone);
+  }
+
+  .resto-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 5px;
+    gap: 8px;
+  }
+
+  .resto-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .resto-address {
+    font-size: 11px;
+    color: rgba(61,51,38,0.55);
+    margin-top: 1px;
+    letter-spacing: 0.2px;
+  }
+
+  .resto-rating {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    padding-top: 1px;
+  }
+
+  .resto-desc {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+
+  /* TIPS BOX */
+  .tips-box {
+    margin: 0 16px 32px;
+    background: var(--ink);
+    border-radius: 4px;
+    padding: 22px 20px;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .tips-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--gold-light);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tips-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tips-list li {
+    font-size: 13.5px;
+    color: rgba(245,239,228,0.8);
+    line-height: 1.5;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .tips-list li::before {
+    content: '—';
+    color: var(--gold);
+    flex-shrink: 0;
+    font-weight: 500;
+  }
+
+
+  /* ── INTERACTIVE ── */
+
+  /* Visited overlay */
+  .stop.visited {
+    background: linear-gradient(to right, rgba(74,103,65,0.04), transparent);
+  }
+  .stop.visited .stop-icon {
+    background: var(--moss);
+    color: #fff;
+    position: relative;
+  }
+  .stop.visited .stop-name { text-decoration: line-through; opacity: 0.55; }
+
+  /* Check button */
+  .check-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .check-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11.5px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1.5px solid var(--parchment);
+    background: #fff;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.18s ease;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .check-btn:active { transform: scale(0.96); }
+  .check-btn.done {
+    background: var(--moss);
+    border-color: var(--moss);
+    color: #fff;
+  }
+
+  /* Stars */
+  .stars-row {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin-top: 6px;
+  }
+  .stars-label {
+    font-size: 10px;
+    color: rgba(61,51,38,0.45);
+    letter-spacing: 0.5px;
+    margin-right: 2px;
+  }
+  .star {
+    font-size: 20px;
+    cursor: pointer;
+    color: #D9CFC0;
+    transition: color 0.12s, transform 0.1s;
+    line-height: 1;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .star.lit { color: var(--gold); }
+  .star:active { transform: scale(1.25); }
+
+  /* Resto stars (smaller) */
+  .resto-stars-row {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-top: 7px;
+  }
+  .resto-stars-label {
+    font-size: 10px;
+    color: rgba(61,51,38,0.4);
+    letter-spacing: 0.3px;
+    margin-right: 2px;
+  }
+  .rstar {
+    font-size: 17px;
+    cursor: pointer;
+    color: #D9CFC0;
+    transition: color 0.12s, transform 0.1s;
+    line-height: 1;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .rstar.lit { color: var(--gold); }
+  .rstar:active { transform: scale(1.2); }
+
+  /* Email button */
+  .email-btn-wrap {
+    margin: 0 16px 40px;
+  }
+  .email-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px 20px;
+    background: var(--gold);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: background 0.18s, transform 0.1s;
+    box-shadow: 0 2px 12px rgba(201,168,76,0.35);
+  }
+  .email-btn:active { transform: scale(0.98); background: var(--gold-light); }
+  .email-icon { font-size: 18px; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 24px 16px 40px;
+    color: rgba(28,22,16,0.35);
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .section-gap { height: 8px; }
+
+  /* MAPS LINK */
+  .maps-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--sky);
+    text-decoration: none;
+    margin-top: 8px;
+    padding: 4px 10px;
+    background: #EEF3F8;
+    border-radius: 20px;
+    letter-spacing: 0.2px;
+  }
+  .maps-link:active { opacity: 0.7; }
+
+  .resto-maps-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 10.5px;
+    font-weight: 500;
+    color: var(--sky);
+    text-decoration: none;
+    margin-top: 6px;
+    padding: 3px 8px;
+    background: #EEF3F8;
+    border-radius: 20px;
+  }
+  .resto-maps-link:active { opacity: 0.7; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-label">Patrimonio de la Humanidad · UNESCO</p>
+  <h1>Toledo<em>fin de semana</em></h1>
+  <p class="hero-sub">Viernes tarde · Sábado · Domingo tarde</p>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="ornament">✦</div>
+
+<!-- DÍA 1 -->
+<div class="day-block">
+  <div class="day-header viernes">
+    <div class="day-badge">
+      <span class="num">1</span>
+      <span class="dia">día</span>
+    </div>
+    <div class="day-title-wrap">
+      <p class="subtitle">Viernes tarde</p>
+      <h2>Primera inmersión</h2>
+    </div>
+  </div>
+  <div class="day-body">
+
+    <div class="stop" data-stop="bisagra" data-name="Puerta de Bisagra">
+      <div class="stop-left">
+        <div class="stop-icon">🏛️</div>
+        <div class="stop-line"></div>
+      </div>
+      <div class="stop-content">
+        <p class="stop-time">~17:30</p>
+        <p class="stop-name">Puerta de Bisagra</p>
+        <p class="stop-desc">La entrada monumental a la ciudad amurallada. Construida en 1559 bajo Carlos I. Empieza aquí para orientarte y sentir el peso de la historia al cruzar.</p>
+        <div class="stop-tags">
+          <span class="tag tag-free">✓ Gratis</span>
+          <span class="tag tag-time">⏱ 20 min</span>
+        </div>
+        <a class="maps-link" href="https://maps.google.com/?q=Puerta+de+Bisagra,+Toledo" target="_blank">📍 Ver en Google Maps</a>
+        <div class="check-row">
+          <button class="check-btn">○ Marcar como visitado</button>
+        </div>
+        <div class="stars-row" data-stars="bisagra">
+          <span class="stars-label">Mi valoración:</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop" data-stop="cristoluz" data-name="Mezquita del Cristo de la Luz">
+      <div class="stop-left">
+        <div class="stop-icon">🕌</div>
+        <div class="stop-line"></div>
+      </div>
+      <div class="stop-content">
+        <p class="stop-time">~18:00</p>
+        <p class="stop-name">Mezquita del Cristo de la Luz</p>
+        <p class="stop-desc">El monumento más antiguo de Toledo, del año 999. Pequeño pero fascinante — tres culturas en un mismo edificio: árabe, visigoda, cristiana.</p>
+        <div class="stop-tags">
+          <span class="tag tag-price">€ ~3€</span>
+          <span class="tag tag-time">⏱ 30 min</span>
+          <span class="tag tag-tip">🕕 Cierra 18:45</span>
+        </div>
+        <a class="maps-link" href="https://maps.google.com/?q=Mezquita+Cristo+de+la+Luz,+Toledo" target="_blank">📍 Ver en Google Maps</a>
+        <div class="check-row">
+          <button class="check-btn">○ Marcar como visitado</button>
+        </div>
+        <div class="stars-row" data-stars="cristoluz">
+          <span class="stars-label">Mi valoración:</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop" data-stop="zocodover" data-name="Plaza de Zocodover">
+      <div class="stop-left">
+        <div class="stop-icon">🌆</div>
+        <div class="stop-line"></div>
+      </div>
+      <div class="stop-content">
+        <p class="stop-time">~19:30</p>
+        <p class="stop-name">Plaza de Zocodover</p>
+        <p class="stop-desc">El corazón de Toledo. Pasea y absorbe el ambiente nocturno: el casco iluminado de noche es espectacular. Luego cena cerca.</p>
+        <div class="stop-tags">
+          <span class="tag tag-tip">🌙 Noche</span>
+        </div>
+        <a class="maps-link" href="https://maps.google.com/?q=Plaza+de+Zocodover,+Toledo" target="_blank">📍 Ver en Google Maps</a>
+        <div class="check-row">
+          <button class="check-btn">○ Marcar como visitado</button>
+        </div>
+        <div class="stars-row" data-stars="zocodover">
+          <span class="stars-label">Mi valoración:</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="stop-left">
+        <div class="stop-icon">🍷</div>
+        <div class="stop-line"></div>
+      </div>
+      <div class="stop-content">
+        <p class="stop-time">21:00</p>
+        <p class="stop-name">Cena — Viernes noche</p>
+        <p class="stop-desc">Primera noche, sin agobio. Dos opciones con buena relación calidad-precio que no necesitan reserva con antelación.</p>
+        <div class="resto-list">
+
+          <div class="resto-card" data-resto="botero_v" data-name="Taberna el Botero" data-resto="skala" data-name="Taberna Skala">
+            <div class="resto-top">
+              <div>
+                <p class="resto-name"><a class="resto-maps-link" href="https://maps.google.com/?q=Taberna+El+Botero+Toledo" target="_blank">📍</a> Taberna el Botero</p>
+                <p class="resto-address">C/ de la Ciudad, 5 · junto a Zocodover</p>
+              </div>
+              <div class="resto-rating">⭐ 4.6</div>
+            </div>
+            <p class="resto-desc">Cocina castellana con toque creativo. Buenas croquetas, bacalao al carbón, carnes. Bar animado en planta baja. Abierto hasta la 1 AM los viernes.</p>
+            <div class="stop-tags" style="margin-top:6px">
+              <span class="tag tag-price">€€ A la carta</span>
+              <span class="tag tag-free">🕐 Hasta 1 AM</span>
+            </div>
+          <div class="resto-stars-row" data-rstars="botero_v">
+            <span class="resto-stars-label">Mi valoración:</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+          </div>
+          <div class="resto-stars-row" data-rstars="skala">
+            <span class="resto-stars-label">Mi valoración:</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+          </div>
+          </div>
+
+          <div class="resto-card" style="border-bottom:none; margin-bottom:0; padding-bottom:0" data-resto="alfileritos" data-name="Alfileritos 24">
+            <div class="resto-top">
+              <div>
+                <p class="resto-name"><a class="resto-maps-link" href="https://maps.google.com/?q=Alfileritos+24+Toledo" target="_blank">📍</a> Alfileritos 24</p>
+                <p class="resto-address">C/ Alfileritos, 24 · 5 min de Zocodover</p>
+              </div>
+              <div class="resto-rating">⭐ 4.4</div>
+            </div>
+            <p class="resto-desc">Amplia carta de cocina toledana en un espacio bonito. Perdiz en ensalada, venado, cordero. Muy buena relación precio-calidad. Abierto hasta las 11:30 PM.</p>
+            <div class="stop-tags" style="margin-top:6px">
+              <span class="tag tag-price">€€ A la carta</span>
+              <span class="tag tag-free">🕐 Hasta 11:30 PM</span>
+            </div>
+          <div class="resto-stars-row" data-rstars="alfileritos">
+            <span class="resto-stars-label">Mi valoración:</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+          </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DÍA 2 -->
+<div class="day-block">
+  <div class="day-header sabado">
+    <div class="day-badge">
+      <span class="num">2</span>
+      <span class="dia">día</span>
+    </div>
+    <div class="day-title-wrap">
+      <p class="subtitle">Sábado</p>
+      <h2>El día grande</h2>
+    </div>
+  </div>
+  <div class="day-body">
+
+    <div class="stop" data-stop="catedral" data-name="Catedral Primada">
+      <div class="stop-left">
+        <div class="stop-icon">⛪</div>
+        <div class="stop-line"></div>
+      </div>
+      <div class="stop-content">
+        <p class="stop-time">10:00</p>
+        <p class="stop-name">Catedral Primada</p>
+        <p class="stop-desc">Lo más importante de Toledo. Una de las grandes catedrales góticas de Europa. Llegas a las 10 en punto para evitar aglomeraciones. Reserva el ticket online.</p>
+        <div class="stop-tags">
+          <span class="tag tag-price">€ ~12€</span>
+          <span class="tag tag-time">⏱ 1.5–2h</span>
+          <span class="tag tag-tip">📱 Reserva online</span>
+        </div>
+        <a class="maps-link" href="https://maps.google.com/?q=Catedral+de+Toledo" target="_blank">📍 Ver en Google Maps</a>
+        <div class="check-row">
+          <button class="check-btn">○ Marcar como visitado</button>
+        </div>
+        <div class="stars-row" data-stars="catedral">
+          <span class="stars-label">Mi valoración:</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop" data-stop="sinagoga" data-name="Sinagoga del Tránsito">
+      <div class="stop-left">
+        <div class="stop-icon">✡️</div>
+        <div class="stop-line"></div>
+      </div>
+      <div class="stop-content">
+        <p class="stop-time">12:15</p>
+        <p class="stop-name">Sinagoga del Tránsito</p>
+        <p class="stop-desc">Joya del barrio judío. Decoración mudéjar extraordinaria y museo sefardí muy bien curado. A dos minutos de la Catedral.</p>
+        <div class="stop-tags">
+          <span class="tag tag-price">€ ~3€</span>
+          <span class="tag tag-time">⏱ 45 min</span>
+        </div>
+        <a class="maps-link" href="https://maps.google.com/?q=Sinagoga+del+Transito,+Toledo" target="_blank">📍 Ver en Google Maps</a>
+        <div class="check-row">
+          <button class="check-btn">○ Marcar como visitado</button>
+        </div>
+        <div class="stars-row" data-stars="sinagoga">
+          <span class="stars-label">Mi valoración:</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop" data-stop="greco" data-name="Museo del Greco">
+      <div class="stop-left">
+        <div class="stop-icon">🖼️</div>
+        <div class="stop-line"></div>
+      </div>
+      <div class="stop-content">
+        <p class="stop-time">13:15</p>
+        <p class="stop-name">Museo del Greco</p>
+        <p class="stop-desc">Justo al lado de la Sinagoga. Casa-museo con obras originales del pintor cretense. El jardín es perfecto para descansar antes de comer.</p>
+        <div class="stop-tags">
+          <span class="tag tag-price">€ ~3€</span>
+          <span class="tag tag-time">⏱ 45 min</span>
+        </div>
+        <a class="maps-link" href="https://maps.google.com/?q=Museo+del+Greco,+Toledo" target="_blank">📍 Ver en Google Maps</a>
+        <div class="check-row">
+          <button class="check-btn">○ Marcar como visitado</button>
+        </div>
+        <div class="stars-row" data-stars="greco">
+          <span class="stars-label">Mi valoración:</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="stop-left">
+        <div class="stop-icon">🍽️</div>
+        <div class="stop-line"></div>
+      </div>
+      <div class="stop-content">
+        <p class="stop-time">14:00</p>
+        <p class="stop-name">Comida — Cocina Toledana</p>
+        <p class="stop-desc">Tres opciones recomendadas según lo que busques. Típico de la zona: perdiz a la toledana, carcamusa, venado, cochinillo. Mazapán de postre.</p>
+        <div class="stop-tags">
+          <span class="tag tag-tip">🍷 Reserva si puedes</span>
+        </div>
+        <div class="resto-list">
+
+          <div class="resto-card" data-resto="cobertizo" data-name="El Cobertizo">
+            <div class="resto-top">
+              <div>
+                <p class="resto-name"><a class="resto-maps-link" href="https://maps.google.com/?q=El+Cobertizo+Toledo" target="_blank">📍</a> El Cobertizo</p>
+                <p class="resto-address">C/ Hombre de Palo, 9 · cerca de la Catedral</p>
+              </div>
+              <div class="resto-rating">⭐ 4.5</div>
+            </div>
+            <p class="resto-desc">Clásico toledano sin trampa. Menú del día desde 18,50 € (pan, bebida, 2 platos, postre). La perdiz a la toledana y el ciervo son los platos estrella. Abierto todos los días.</p>
+            <div class="stop-tags" style="margin-top:6px">
+              <span class="tag tag-price">€€ Menú ~19€</span>
+              <span class="tag tag-free">📍 5 min a pie</span>
+            </div>
+          <div class="resto-stars-row" data-rstars="cobertizo">
+            <span class="resto-stars-label">Mi valoración:</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+          </div>
+          </div>
+
+          <div class="resto-card" data-resto="botero_s" data-name="Taberna el Botero">
+            <div class="resto-top">
+              <div>
+                <p class="resto-name"><a class="resto-maps-link" href="https://maps.google.com/?q=Taberna+El+Botero+Toledo" target="_blank">📍</a> Taberna el Botero</p>
+                <p class="resto-address">C/ de la Ciudad, 5 · centro histórico</p>
+              </div>
+              <div class="resto-rating">⭐ 4.6</div>
+            </div>
+            <p class="resto-desc">Cocina tradicional con toque creativo. Croquetas, bacalao al carbón, carnes a la piedra. Ambiente animado, buen bar. Abre desde las 12:30.</p>
+            <div class="stop-tags" style="margin-top:6px">
+              <span class="tag tag-price">€€ A la carta</span>
+              <span class="tag tag-free">📍 10 min a pie</span>
+            </div>
+          <div class="resto-stars-row" data-rstars="botero_s">
+            <span class="resto-stars-label">Mi valoración:</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+          </div>
+          </div>
+
+          <div class="resto-card" style="border-bottom:none; margin-bottom:0; padding-bottom:0" data-resto="laorza_s" data-name="La Orza">
+            <div class="resto-top">
+              <div>
+                <p class="resto-name"><a class="resto-maps-link" href="https://maps.google.com/?q=La+Orza+Toledo" target="_blank">📍</a> La Orza</p>
+                <p class="resto-address">C/ Descalzos, 5 · judería</p>
+              </div>
+              <div class="resto-rating">⭐ 4.5</div>
+            </div>
+            <p class="resto-desc">La opción más gastronómica. Cocina toledana de autor: perdiz, venado, cochinillo, rabo de toro. Ponche Toledano de postre (mazapán en capas). <strong>Reserva imprescindible.</strong></p>
+            <div class="stop-tags" style="margin-top:6px">
+              <span class="tag tag-price">€€€ A la carta</span>
+              <span class="tag tag-tip">📞 Reserva previa</span>
+            </div>
+          <div class="resto-stars-row" data-rstars="laorza_s">
+            <span class="resto-stars-label">Mi valoración:</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+          </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="stop" data-stop="sanjuan" data-name="Monasterio de San Juan de los Reyes">
+      <div class="stop-left">
+        <div class="stop-icon">⚜️</div>
+        <div class="stop-line"></div>
+      </div>
+      <div class="stop-content">
+        <p class="stop-time">16:00</p>
+        <p class="stop-name">Monasterio de San Juan de los Reyes</p>
+        <p class="stop-desc">Mandado construir por los Reyes Católicos. El claustro es de los más bonitos de España — gótico isabelino con detalles mudéjares. Solo 4€ y casi sin gente.</p>
+        <div class="stop-tags">
+          <span class="tag tag-price">€ 4€</span>
+          <span class="tag tag-time">⏱ 1h</span>
+          <span class="tag tag-tip">🌟 No te lo saltes</span>
+        </div>
+        <a class="maps-link" href="https://maps.google.com/?q=Monasterio+San+Juan+de+los+Reyes,+Toledo" target="_blank">📍 Ver en Google Maps</a>
+        <div class="check-row">
+          <button class="check-btn">○ Marcar como visitado</button>
+        </div>
+        <div class="stars-row" data-stars="sanjuan">
+          <span class="stars-label">Mi valoración:</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop" data-stop="sanmartin" data-name="Puente de San Martín">
+      <div class="stop-left">
+        <div class="stop-icon">🌉</div>
+        <div class="stop-line"></div>
+      </div>
+      <div class="stop-content">
+        <p class="stop-time">17:00</p>
+        <p class="stop-name">Puente de San Martín</p>
+        <p class="stop-desc">Baja al puente medieval al atardecer. Las vistas de Toledo sobre el Tajo con luz dorada son de las mejores estampas que te vas a llevar del viaje.</p>
+        <div class="stop-tags">
+          <span class="tag tag-free">✓ Gratis</span>
+          <span class="tag tag-tip">🌅 Al atardecer</span>
+        </div>
+        <a class="maps-link" href="https://maps.google.com/?q=Puente+de+San+Martin,+Toledo" target="_blank">📍 Ver en Google Maps</a>
+        <div class="check-row">
+          <button class="check-btn">○ Marcar como visitado</button>
+        </div>
+        <div class="stars-row" data-stars="sanmartin">
+          <span class="stars-label">Mi valoración:</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop" data-stop="santotome" data-name="Iglesia de Santo Tomé — El Greco">
+      <div class="stop-left">
+        <div class="stop-icon">🎨</div>
+        <div class="stop-line"></div>
+      </div>
+      <div class="stop-content">
+        <p class="stop-time">17:30</p>
+        <p class="stop-name">Iglesia de Santo Tomé</p>
+        <p class="stop-desc">Aquí se expone <em>El Entierro del Conde de Orgaz</em>, la obra maestra absoluta de El Greco. Un cuadro enorme (4,8 × 3,6 m) que te deja sin palabras. Visita rápida pero impactante — solo entras a ver el cuadro. Cierra a las 18:45, llega antes de las 18:30.</p>
+        <div class="stop-tags">
+          <span class="tag tag-price">€ ~4€</span>
+          <span class="tag tag-time">⏱ 30 min</span>
+          <span class="tag tag-tip">🕕 Cierra 18:45</span>
+        </div>
+        <a class="maps-link" href="https://maps.google.com/?q=Iglesia+Santo+Tome+Toledo" target="_blank">📍 Ver en Google Maps</a>
+        <div class="check-row">
+          <button class="check-btn">○ Marcar como visitado</button>
+        </div>
+        <div class="stars-row" data-stars="santotome">
+          <span class="stars-label">Mi valoración:</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop" data-stop="santacruz" data-name="Museo de Santa Cruz">
+      <div class="stop-left">
+        <div class="stop-icon">🏛️</div>
+        <div class="stop-line"></div>
+      </div>
+      <div class="stop-content">
+        <p class="stop-time">19:00</p>
+        <p class="stop-name">Museo de Santa Cruz</p>
+        <p class="stop-desc">El museo más importante de Toledo y uno de los más infravalorados. Arte, arqueología y artes decorativas en un edificio plateresco espectacular del s. XVI. Hay obras de El Greco, tapices flamencos y restos romanos. <strong>Entrada gratuita.</strong> Cierra a las 19:30 los sábados — llega puntual.</p>
+        <div class="stop-tags">
+          <span class="tag tag-free">✓ Gratis</span>
+          <span class="tag tag-time">⏱ 45 min</span>
+          <span class="tag tag-tip">🕕 Cierra 19:30</span>
+        </div>
+        <a class="maps-link" href="https://maps.google.com/?q=Museo+de+Santa+Cruz,+Toledo" target="_blank">📍 Ver en Google Maps</a>
+        <div class="check-row">
+          <button class="check-btn">○ Marcar como visitado</button>
+        </div>
+        <div class="stars-row" data-stars="santacruz">
+          <span class="stars-label">Mi valoración:</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop" data-stop="paseonoche" data-name="Paseo nocturno por el casco">
+      <div class="stop-left">
+        <div class="stop-icon">🌙</div>
+        <div class="stop-line"></div>
+      </div>
+      <div class="stop-content">
+        <p class="stop-time">20:00</p>
+        <p class="stop-name">Paseo nocturno + vermú</p>
+        <p class="stop-desc">Toledo de noche es otro mundo. Pasea sin prisas por las callejuelas del casco histórico iluminado, acércate a la Plaza del Ayuntamiento (frente a la Catedral) y tómate un vermú o una caña en alguna terraza antes de cenar.</p>
+        <div class="stop-tags">
+          <span class="tag tag-free">✓ Gratis</span>
+          <span class="tag tag-tip">🌃 No te lo saltes</span>
+        </div>
+        <div class="check-row">
+          <button class="check-btn">○ Marcar como visitado</button>
+        </div>
+        <div class="stars-row" data-stars="paseonoche">
+          <span class="stars-label">Mi valoración:</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="stop-left">
+        <div class="stop-icon">🍷</div>
+        <div class="stop-line"></div>
+      </div>
+      <div class="stop-content">
+        <p class="stop-time">21:00</p>
+        <p class="stop-name">Cena — Sábado noche</p>
+        <p class="stop-desc">El día más completo merece la mejor cena. Dos opciones: una íntima y gastronómica, otra más animada. Para ambas se recomienda reservar.</p>
+        <div class="resto-list">
+
+          <div class="resto-card" data-resto="fabula" data-name="Restaurante Fábula">
+            <div class="resto-top">
+              <div>
+                <p class="resto-name"><a class="resto-maps-link" href="https://maps.google.com/?q=Restaurante+Fabula+Toledo" target="_blank">📍</a> Restaurante Fábula</p>
+                <p class="resto-address">C/ de la Merced, 6 · cerca de Bisagra</p>
+              </div>
+              <div class="resto-rating">⭐ 4.6</div>
+            </div>
+            <p class="resto-desc">Pequeño, íntimo y muy bien ejecutado. Carta corta pero cuidada: ciervo, morcilla con manzana, croquetas de jamón, provolone fundido. Carta de vinos castellanos interesante. Abre hasta medianoche los sábados.</p>
+            <div class="stop-tags" style="margin-top:6px">
+              <span class="tag tag-price">€€ A la carta</span>
+              <span class="tag tag-tip">📞 Reserva recomendada</span>
+            </div>
+          <div class="resto-stars-row" data-rstars="fabula">
+            <span class="resto-stars-label">Mi valoración:</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+          </div>
+          </div>
+
+          <div class="resto-card" style="border-bottom:none; margin-bottom:0; padding-bottom:0" data-resto="laorza_c" data-name="La Orza (cena sábado)">
+            <div class="resto-top">
+              <div>
+                <p class="resto-name">La Orza</p>
+                <p class="resto-address">C/ Descalzos, 5 · judería</p>
+              </div>
+              <div class="resto-rating">⭐ 4.5</div>
+            </div>
+            <p class="resto-desc">Si no fuiste a comer, la noche del sábado es el momento. Cocina toledana de autor: venado, cochinillo, rabo de toro. El Ponche Toledano (mazapán en capas con oro) es el mejor postre de la ciudad. Abre hasta las 10:30 PM.</p>
+            <div class="stop-tags" style="margin-top:6px">
+              <span class="tag tag-price">€€€ A la carta</span>
+              <span class="tag tag-tip">📞 Reserva imprescindible</span>
+            </div>
+          <div class="resto-stars-row" data-rstars="laorza_c">
+            <span class="resto-stars-label">Mi valoración:</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+          </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DÍA 3 -->
+<div class="day-block">
+  <div class="day-header domingo">
+    <div class="day-badge">
+      <span class="num">3</span>
+      <span class="dia">día</span>
+    </div>
+    <div class="day-title-wrap">
+      <p class="subtitle">Domingo hasta la tarde</p>
+      <h2>Cierre con panorámica</h2>
+    </div>
+  </div>
+  <div class="day-body">
+
+    <div class="stop" data-stop="alcazar" data-name="Alcázar de Toledo">
+      <div class="stop-left">
+        <div class="stop-icon">🏰</div>
+        <div class="stop-line"></div>
+      </div>
+      <div class="stop-content">
+        <p class="stop-time">10:00</p>
+        <p class="stop-name">Alcázar de Toledo</p>
+        <p class="stop-desc">La fortaleza que domina la ciudad. Dentro alberga el Museo del Ejército con historia desde los romanos hasta la Guerra Civil. Vistas panorámicas desde el exterior.</p>
+        <div class="stop-tags">
+          <span class="tag tag-price">€ ~5€</span>
+          <span class="tag tag-time">⏱ 1.5h</span>
+          <span class="tag tag-tip">❌ Cerrado lunes</span>
+        </div>
+        <a class="maps-link" href="https://maps.google.com/?q=Alcazar+de+Toledo" target="_blank">📍 Ver en Google Maps</a>
+        <div class="check-row">
+          <button class="check-btn">○ Marcar como visitado</button>
+        </div>
+        <div class="stars-row" data-stars="alcazar">
+          <span class="stars-label">Mi valoración:</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="stop-left">
+        <div class="stop-icon">🍽️</div>
+        <div class="stop-line"></div>
+      </div>
+      <div class="stop-content">
+        <p class="stop-time">14:00</p>
+        <p class="stop-name">Comida — Domingo</p>
+        <p class="stop-desc">La última comida antes de volver. Domingo es día de menú tranquilo — varios sitios buenos abren solo a mediodía, así que no lo dejes para tarde.</p>
+        <div class="resto-list">
+
+          <div class="resto-card">
+            <div class="resto-top">
+              <div>
+                <p class="resto-name"><a class="resto-maps-link" href="https://maps.google.com/?q=Taberna+Skala+Toledo" target="_blank">📍</a> Taberna Skala</p>
+                <p class="resto-address">Cuesta de la Sal, 5 · junto a Zocodover</p>
+              </div>
+              <div class="resto-rating">⭐ 4.6</div>
+            </div>
+            <p class="resto-desc">La carcamusa más reputada de Toledo. Raciones enormes, precios bajísimos y ambiente 100% local. Sin reserva, pero llega puntual — se llena rápido los domingos. Abre hasta las 5 PM.</p>
+            <div class="stop-tags" style="margin-top:6px">
+              <span class="tag tag-price">€ Raciones</span>
+              <span class="tag tag-tip">🏆 La carcamusa de Toledo</span>
+            </div>
+          </div>
+
+          <div class="resto-card" data-resto="lonuestro" data-name="Lo Nuestro Tapería">
+            <div class="resto-top">
+              <div>
+                <p class="resto-name"><a class="resto-maps-link" href="https://maps.google.com/?q=Lo+Nuestro+Taperia+Toledo" target="_blank">📍</a> Lo Nuestro Tapería</p>
+                <p class="resto-address">C/ San Juan de Dios, 7 · judería</p>
+              </div>
+              <div class="resto-rating">⭐ 4.5</div>
+            </div>
+            <p class="resto-desc">Terraza agradable en el barrio judío. Menú del día con productos locales, sangria de cosecha propia y ambiente familiar. Perfecto para una última comida sin prisas. Abre todos los domingos hasta las 5:30 PM.</p>
+            <div class="stop-tags" style="margin-top:6px">
+              <span class="tag tag-price">€€ Menú del día</span>
+              <span class="tag tag-free">☀️ Terraza</span>
+            </div>
+          <div class="resto-stars-row" data-rstars="lonuestro">
+            <span class="resto-stars-label">Mi valoración:</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+          </div>
+          </div>
+
+          <div class="resto-card" style="border-bottom:none; margin-bottom:0; padding-bottom:0" data-resto="lamanuela" data-name="La Manuela Toledo">
+            <div class="resto-top">
+              <div>
+                <p class="resto-name"><a class="resto-maps-link" href="https://maps.google.com/?q=La+Manuela+Toledo" target="_blank">📍</a> La Manuela Toledo</p>
+                <p class="resto-address">C/ Taller del Moro, 5 · cerca del judería</p>
+              </div>
+              <div class="resto-rating">⭐ 4.8</div>
+            </div>
+            <p class="resto-desc">El mejor valorado de la ciudad. Pulpo, venado, dorada a la brasa. Carta corta pero impecable. Solo abre domingos hasta las 4 PM — reserva con antelación o llegas a las 2 en punto.</p>
+            <div class="stop-tags" style="margin-top:6px">
+              <span class="tag tag-price">€€€ A la carta</span>
+              <span class="tag tag-tip">📞 Reserva recomendada</span>
+              <span class="tag tag-free">🕓 Cierra 16:00</span>
+            </div>
+          <div class="resto-stars-row" data-rstars="lamanuela">
+            <span class="resto-stars-label">Mi valoración:</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+            <span class="rstar">★</span>
+          </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="stop" data-stop="mirador" data-name="Mirador del Valle">
+      <div class="stop-left">
+        <div class="stop-icon">📸</div>
+        <div class="stop-line"></div>
+      </div>
+      <div class="stop-content">
+        <p class="stop-time">Al salir</p>
+        <p class="stop-name">Mirador del Valle</p>
+        <p class="stop-desc">La postal icónica de Toledo. Cruza el Tajo al salir de la ciudad (taxi o coche) y sube aquí. La panorámica de toda la ciudad con el río es la imagen del fin de semana. Gratis.</p>
+        <div class="stop-tags">
+          <span class="tag tag-free">✓ Gratis</span>
+          <span class="tag tag-time">⏱ 20 min</span>
+          <span class="tag tag-tip">🚗 Necesitas coche/taxi</span>
+        </div>
+        <a class="maps-link" href="https://maps.google.com/?q=Mirador+del+Valle,+Toledo" target="_blank">📍 Ver en Google Maps</a>
+        <div class="check-row">
+          <button class="check-btn">○ Marcar como visitado</button>
+        </div>
+        <div class="stars-row" data-stars="mirador">
+          <span class="stars-label">Mi valoración:</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- EMAIL BUTTON -->
+<div class="email-btn-wrap">
+  <button class="email-btn">
+    <span class="email-icon">✉️</span>
+    Enviar resumen por correo
+  </button>
+</div>
+
+<!-- TIPS -->
+<div class="tips-box">
+  <h3>✦ Tips esenciales</h3>
+  <ul class="tips-list">
+    <li>El casco histórico es pequeño pero con mucha cuesta — lleva calzado cómodo.</li>
+    <li>El mazapán de Santo Tomé es el mejor de la ciudad. Cómprate una caja para llevar.</li>
+    <li>Las espadas y cuchillos de Toledo son famosos — hay tiendas artesanas de calidad.</li>
+    <li>Si llueve, el Alcázar y los museos te cubren perfectamente el programa.</li>
+    <li>Toledo iluminada de noche vale un paseo extra después de cenar.</li>
+  </ul>
+</div>
+
+<footer>
+  Toledo · Patrimonio Mundial UNESCO · Castilla-La Mancha
+</footer>
+
+
+<script>
+// ── Storage con fallback silencioso ─────────────────────────────────────────
+const LS_KEY = 'toledo-guia-v1';
+let state = {};
+
+function loadState() {
+  try { const s = localStorage.getItem(LS_KEY); if (s) state = JSON.parse(s); } catch(e) {}
+}
+function save() {
+  try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch(e) {}
+}
+function getEntry(id) {
+  if (!state[id]) state[id] = { visited: false, stars: 0 };
+  return state[id];
+}
+
+// ── Render helpers ───────────────────────────────────────────────────────────
+function renderStop(id) {
+  const el  = document.querySelector('[data-stop="' + id + '"]');
+  if (!el) return;
+  const s   = getEntry(id);
+  const btn = el.querySelector('.check-btn');
+  const row = el.querySelector('[data-stars]');
+  el.classList.toggle('visited', s.visited);
+  btn.classList.toggle('done', s.visited);
+  btn.textContent = s.visited ? '✓ ¡Visitado!' : '○ Marcar como visitado';
+  if (row) row.querySelectorAll('.star').forEach((star, i) => star.classList.toggle('lit', i < s.stars));
+}
+
+function renderResto(id) {
+  const row = document.querySelector('[data-rstars="' + id + '"]');
+  if (!row) return;
+  const s = getEntry(id);
+  row.querySelectorAll('.rstar').forEach((star, i) => star.classList.toggle('lit', i < s.stars));
+}
+
+// ── Event delegation (un solo listener por tipo) ─────────────────────────────
+document.addEventListener('click', function(e) {
+  // Check button
+  const btn = e.target.closest('.check-btn');
+  if (btn) {
+    const stop = btn.closest('[data-stop]');
+    if (stop) {
+      const id = stop.dataset.stop;
+      getEntry(id).visited = !getEntry(id).visited;
+      save();
+      renderStop(id);
+    }
+    return;
+  }
+
+  // Stop star
+  const star = e.target.closest('.star');
+  if (star) {
+    const row = star.closest('[data-stars]');
+    if (row) {
+      const id  = row.dataset.stars;
+      const idx = Array.from(row.querySelectorAll('.star')).indexOf(star) + 1;
+      const s   = getEntry(id);
+      s.stars   = (s.stars === idx) ? 0 : idx;
+      save();
+      renderStop(id);
+    }
+    return;
+  }
+
+  // Resto star
+  const rstar = e.target.closest('.rstar');
+  if (rstar) {
+    const row = rstar.closest('[data-rstars]');
+    if (row) {
+      const id  = row.dataset.rstars;
+      const idx = Array.from(row.querySelectorAll('.rstar')).indexOf(rstar) + 1;
+      const s   = getEntry(id);
+      s.stars   = (s.stars === idx) ? 0 : idx;
+      save();
+      renderResto(id);
+    }
+    return;
+  }
+
+  // Email button
+  if (e.target.closest('.email-btn')) {
+    sendEmail();
+  }
+});
+
+// ── Restaurar UI al cargar ───────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  loadState();
+  document.querySelectorAll('[data-stop]').forEach(el => renderStop(el.dataset.stop));
+  document.querySelectorAll('[data-rstars]').forEach(row => renderResto(row.dataset.rstars));
+});
+
+// ── EMAIL ────────────────────────────────────────────────────────────────────
+function starLabel(n) {
+  if (!n) return '(sin valorar)';
+  return '★'.repeat(n) + '☆'.repeat(5 - n) + ' (' + n + '/5)';
+}
+
+function sendEmail() {
+  const allStops  = document.querySelectorAll('[data-stop]');
+  const allRestos = document.querySelectorAll('[data-resto]');
+  let visited = [], notVisited = [], restoRated = [];
+
+  allStops.forEach(el => {
+    const s = state[el.dataset.stop] || {};
+    const line = el.dataset.name + '  ' + starLabel(s.stars || 0);
+    s.visited ? visited.push(line) : notVisited.push(el.dataset.name);
+  });
+
+  allRestos.forEach(el => {
+    const s = state[el.dataset.resto] || {};
+    if (s.stars) restoRated.push(el.dataset.name + '  ' + starLabel(s.stars));
+  });
+
+  let body = '🏰 RESUMEN DE MI FIN DE SEMANA EN TOLEDO\n';
+  body += '═══════════════════════════════════════\n\n';
+  if (visited.length)    { body += '✅ SITIOS VISITADOS\n───────────────────\n'; visited.forEach(v => body += '• ' + v + '\n'); body += '\n'; }
+  if (notVisited.length) { body += '⬜ PENDIENTES / NO VISITADOS\n────────────────────────────\n'; notVisited.forEach(v => body += '• ' + v + '\n'); body += '\n'; }
+  if (restoRated.length) { body += '🍽 RESTAURANTES VALORADOS\n──────────────────────────\n'; restoRated.forEach(r => body += '• ' + r + '\n'); body += '\n'; }
+  body += '\nGenerado con la guía Toledo · Fin de Semana';
+
+  window.location.href = 'mailto:?subject=' + encodeURIComponent('🏰 Mi fin de semana en Toledo') + '&body=' + encodeURIComponent(body);
+}
+</script>
+
+</body>
+</html>
