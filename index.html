@@ -363,6 +363,34 @@
   }
 
 
+
+  /* ── COLLAPSIBLE DAYS ── */
+  .day-header {
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .day-toggle-icon {
+    margin-left: auto;
+    font-size: 18px;
+    color: rgba(255,255,255,0.7);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+  .day-block.collapsed .day-toggle-icon {
+    transform: rotate(-90deg);
+  }
+  .day-body {
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    max-height: 9000px;
+    opacity: 1;
+  }
+  .day-block.collapsed .day-body {
+    max-height: 0;
+    opacity: 0;
+  }
+
   /* ── INTERACTIVE ── */
 
   /* Visited overlay */
@@ -539,7 +567,7 @@
 
 <!-- DÍA 1 -->
 <div class="day-block">
-  <div class="day-header viernes">
+  <div class="day-header viernes" onclick="toggleDay(this)">
     <div class="day-badge">
       <span class="num">1</span>
       <span class="dia">día</span>
@@ -548,6 +576,7 @@
       <p class="subtitle">Viernes tarde</p>
       <h2>Primera inmersión</h2>
     </div>
+    <span class="day-toggle-icon">▾</span>
   </div>
   <div class="day-body">
 
@@ -646,7 +675,7 @@
         <p class="stop-desc">Primera noche, sin agobio. Dos opciones con buena relación calidad-precio que no necesitan reserva con antelación.</p>
         <div class="resto-list">
 
-          <div class="resto-card" data-resto="botero_v" data-name="Taberna el Botero" data-resto="skala" data-name="Taberna Skala">
+          <div class="resto-card" data-resto="botero_v" data-name="Taberna el Botero">
             <div class="resto-top">
               <div>
                 <p class="resto-name"><a class="resto-maps-link" href="https://maps.google.com/?q=Taberna+El+Botero+Toledo" target="_blank">📍</a> Taberna el Botero</p>
@@ -660,14 +689,6 @@
               <span class="tag tag-free">🕐 Hasta 1 AM</span>
             </div>
           <div class="resto-stars-row" data-rstars="botero_v">
-            <span class="resto-stars-label">Mi valoración:</span>
-            <span class="rstar">★</span>
-            <span class="rstar">★</span>
-            <span class="rstar">★</span>
-            <span class="rstar">★</span>
-            <span class="rstar">★</span>
-          </div>
-          <div class="resto-stars-row" data-rstars="skala">
             <span class="resto-stars-label">Mi valoración:</span>
             <span class="rstar">★</span>
             <span class="rstar">★</span>
@@ -709,7 +730,7 @@
 
 <!-- DÍA 2 -->
 <div class="day-block">
-  <div class="day-header sabado">
+  <div class="day-header sabado" onclick="toggleDay(this)">
     <div class="day-badge">
       <span class="num">2</span>
       <span class="dia">día</span>
@@ -718,6 +739,7 @@
       <p class="subtitle">Sábado</p>
       <h2>El día grande</h2>
     </div>
+    <span class="day-toggle-icon">▾</span>
   </div>
   <div class="day-body">
 
@@ -1101,7 +1123,7 @@
 
 <!-- DÍA 3 -->
 <div class="day-block">
-  <div class="day-header domingo">
+  <div class="day-header domingo" onclick="toggleDay(this)">
     <div class="day-badge">
       <span class="num">3</span>
       <span class="dia">día</span>
@@ -1110,6 +1132,7 @@
       <p class="subtitle">Domingo hasta la tarde</p>
       <h2>Cierre con panorámica</h2>
     </div>
+    <span class="day-toggle-icon">▾</span>
   </div>
   <div class="day-body">
 
@@ -1364,9 +1387,18 @@ document.addEventListener('click', function(e) {
   }
 });
 
+// ── COLLAPSIBLE DAYS ─────────────────────────────────────────────────────────
+function toggleDay(header) {
+  header.closest('.day-block').classList.toggle('collapsed');
+}
+
 // ── Restaurar UI al cargar ───────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function() {
   loadState();
+
+  // Collapse all days by default
+  document.querySelectorAll('.day-block').forEach(b => b.classList.add('collapsed'));
+
   document.querySelectorAll('[data-stop]').forEach(el => renderStop(el.dataset.stop));
   document.querySelectorAll('[data-rstars]').forEach(row => renderResto(row.dataset.rstars));
 });
